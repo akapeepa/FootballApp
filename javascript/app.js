@@ -14,7 +14,7 @@ myApp.config(function($routeProvider,$httpProvider){
     controller:'teamsController',
     controllerAs:'tc'
   })
-  .when('/fixt/:Unique_id',{
+  .when('/fixt',{
     templateUrl:'pages/fixt.htm',
     controller:'fixtController',
     controllerAs:'fc'
@@ -26,6 +26,13 @@ myApp.config(function($routeProvider,$httpProvider){
   })
 });
 
+//service
+myApp.service('myService',function(){
+  var vm= this;
+  vm.api = '';
+});
+
+
 //Controllers
 
 myApp.controller('homeController',['$scope','$http','$resource',function($scope,$http,$resource){
@@ -35,19 +42,25 @@ myApp.controller('homeController',['$scope','$http','$resource',function($scope,
 }]);
 
 
-myApp.controller('teamsController',['$scope','$resource','$routeParams',function($scope,$resource,$routeParams){
+myApp.controller('teamsController',['$scope','$resource','myService','$routeParams',function($scope,$resource,myService,$routeParams){
   var vm = this;
   var id = $routeParams.Unique_id;
   vm.getData = $resource('http://api.football-data.org/v1/soccerseasons/'+ id +'/leagueTable').get();
   console.log(vm.getData);
 
+  vm.getApi = function(api){
+    myService.api = api;
+  }
+
 }]);
 
-myApp.controller('fixtController',['$scope','$resource','$routeParams',function($scope,$resource,routeParams){
+myApp.controller('fixtController',['$scope','$resource','myService',function($scope,$resource,myService){
   var vm = this;
-  var id = $routeParams.Unique_id;
-  vm.getData = $resource('');
-
+  vm.getApi =  myService.api;
+  vm.getFixt = $resource(vm.getApi+'/fixtures').get();
+  console.log(vm.getFixt);
+  vm.getPlayers = $resource(vm.getApi+'/players').get();
+  console.log(vm.getPlayers);
 }]);
 
 myApp.controller('pointsController',['$scope','$resource',function($scope,$resource){

@@ -20,7 +20,7 @@
     <tr ng-repeat="teams in tc.getData.standing">
       <td>{{teams.position}}</td>
       <td><img ng-src="{{teams.crestURI}}" width="80" height="80"></td>
-      <td><a href="#/fixt">{{teams.teamName}}</a></td>
+      <td><a href="#/fixt" ng-click = tc.getApi(teams._links.team.href)>{{teams.teamName}}</a></td>
       <td>{{teams.points}}</td>
       <td>{{teams.playedGames}}</td>
       <td>{{teams.goals}}</td>
