@@ -1,0 +1,30 @@
+<div class="jumbotron">
+  <h2> Points Table </h2>
+  <a href="#/"><h4>Back</h4></a>
+</div>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th></th>
+      <th>Team</th>
+      <th>Points</th>
+      <th>Games Played</th>
+      <th>Goals</th>
+      <th>Wins</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="teams in tc.getData.standing">
+      <td>{{teams.position}}</td>
+      <td><img ng-src="{{teams.crestURI}}" width="80" height="80"></td>
+      <td><a href="#/fixt">{{teams.teamName}}</a></td>
+      <td>{{teams.points}}</td>
+      <td>{{teams.playedGames}}</td>
+      <td>{{teams.goals}}</td>
+      <td>{{teams.wins}}</td>
+    </tr>
+  </tbody>
+</table>
