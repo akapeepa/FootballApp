@@ -19,11 +19,6 @@ myApp.config(function($routeProvider,$httpProvider){
     controller:'fixtController',
     controllerAs:'fc'
   })
-  .when('/points',{
-    templateUrl:'pages/points.htm',
-    controller:'pointsController',
-    controllerAs:'pc'
-  })
 });
 
 //service
@@ -61,9 +56,4 @@ myApp.controller('fixtController',['$scope','$resource','myService',function($sc
   console.log(vm.getFixt);
   vm.getPlayers = $resource(vm.getApi+'/players').get();
   console.log(vm.getPlayers);
-}]);
-
-myApp.controller('pointsController',['$scope','$resource',function($scope,$resource){
-  var vm = this;
-
 }]);
